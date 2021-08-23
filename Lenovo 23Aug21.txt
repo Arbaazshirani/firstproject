@@ -1,0 +1,103 @@
+Lenovo 
+
+DellControllers:-
+package com.py.lenovo.Controller;
+
+import com.py.lenovo.Bean.DellUserBean;
+import com.py.lenovo.Service.DellServices;
+import com.py.lenovo.pojo.DellUser;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(value = "/user")
+@Api(description = "This Api is used for testing")
+public class DellControllers {
+
+    @Autowired
+    private DellServices dellServices;
+
+    @ApiOperation(value = "used to add record to databased")
+    @GetMapping("/getRecord")
+    public DellUser getDellService() {
+        DellUser response = dellServices.getService();
+        return response;
+    }
+
+    @ApiOperation(value = "Used to convert bean to pojo", notes = "Arbaz shirani")
+    @PostMapping("/")
+    public DellUser addRecord(@RequestBody DellUserBean bean){
+        return dellServices.getService(bean);
+    }
+
+}
+
+DellServices:-
+package com.py.lenovo.Service;
+
+import com.py.lenovo.Bean.DellUserBean;
+import com.py.lenovo.pojo.DellUser;
+import org.springframework.stereotype.Service;
+
+@Service
+public class DellServices {
+
+    public DellUser getService(DellUserBean bean) {
+        DellUser pojo = convertBeanToPojo(bean);
+        return pojo;
+    }
+    public DellUser getService() {
+        DellUserBean dellService = new DellUserBean();
+        DellUser myPojo = new DellUser();
+        myPojo.setHandsomeBoy(dellService.getLadka());
+        myPojo.setMobileNo(dellService.getLadki());
+        return myPojo;
+    }
+    private DellUser convertBeanToPojo(DellUserBean bean) {
+        DellUser pojo = new DellUser();
+        pojo.setHandsomeBoy(bean.getLadka());
+        pojo.setMobileNo(bean.getLadki());
+        return pojo;
+    }
+}
+
+DellUser:-
+package com.py.lenovo.pojo;
+
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+public class DellUser {
+
+    @Id
+    @Column(name = "record_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long recordId;
+    @Column(name = "handsome_boy", nullable = false)
+    private String handsomeBoy;
+    @Column(name = "mobile_no", nullable = false)
+    private Integer mobileNo;
+
+}
+
+
+DellUserBean:-
+package com.py.lenovo.Bean;
+
+import lombok.Data;
+
+@Data
+public class DellUserBean {
+
+    public String ladka = "lenovo";
+    public Integer ladki = 1234789980;
+/*    public Long
+    public Double
+    public Float*/
+
+}
