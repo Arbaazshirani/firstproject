@@ -3,9 +3,9 @@ Lenovo
 DellControllers:-
 package com.py.lenovo.Controller;
 
-import com.py.lenovo.Bean.DellUserBean;
+import com.py.lenovo.Bean.UserBean;
 import com.py.lenovo.Service.DellServices;
-import com.py.lenovo.pojo.DellUser;
+import com.py.lenovo.pojo.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +37,8 @@ public class DellControllers {
 DellServices:-
 package com.py.lenovo.Service;
 
-import com.py.lenovo.Bean.DellUserBean;
-import com.py.lenovo.pojo.DellUser;
+import com.py.lenovo.Bean.UserBean;
+import com.py.lenovo.pojo.User;
 import org.springframework.stereotype.Service;
 
 @Service

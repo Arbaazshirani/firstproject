@@ -10,7 +10,17 @@ public class LenovoApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(LenovoApplication.class, args);
+		//ConfigurableApplicationContext configurableApplicationContext =
+				SpringApplication.run(LenovoApplication.class, args);
+		/*UserRepository userRepository = configurableApplicationContext.getBean(UserRepository.class);
+		CompanyRepository companyRepository = configurableApplicationContext.getBean(CompanyRepository.class);
+
+		Company company = new Company("Lenovo", "Sector 35");
+		companyRepository.save(company);
+
+		User user = new User("Aarbaz Shirani", 25, 9876543210L, new Date("1996-08-12"), false, company);
+		userRepository.save(user);*/
+
 	}
 
 }
