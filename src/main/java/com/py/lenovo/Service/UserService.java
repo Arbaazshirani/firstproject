@@ -27,6 +27,15 @@ public class UserService {
         return responseToRequestor;
     }
 
+    public UserBean getRecordsByName(String name)   {
+        User record = userRepository.findByEmployee(name);
+        UserBean response = new UserBean();
+        //if (record != null) {
+            response = convertPojoToBean(record);
+        //}
+        return response;
+    }
+
     public List<UserBean> getRecordsByAge(Integer age){
         List<User> mob = userRepository.findByAge(age);
         List<UserBean> record = new ArrayList<>();
@@ -74,20 +83,17 @@ public class UserService {
         response.setAge(pojorecord.getAge());
         response.setMobile(pojorecord.getMobileNo());
         response.setTarikh(pojorecord.getDate().getTime());
+        response.setCompany(pojorecord.getCompany());
         return response;
     }
 
 
     private User convertBeanToPojo(UserBean bean) {
-
-
-
         User user = new User();
         user.setEmployee(bean.getMembers());
         user.setAge(bean.getAge());
         user.setMobileNo(bean.getMobile());
         user.setDate(new Date(bean.getTarikh()));
-
         return user;
     }
 
@@ -106,8 +112,8 @@ public class UserService {
         return record;
     }
 
-    public User MarkAsRecord(Long markdelete){
-        Optional<User> record = userRepository.findById(markdelete);
+    public User MarkAsRecord(Long id){
+        Optional<User> record = userRepository.getById(id);
         User tempRecord = new User();
         tempRecord.setMobileNo(record.get().getMobileNo());
         tempRecord.setEmployee(record.get().getEmployee());
@@ -115,12 +121,13 @@ public class UserService {
         tempRecord.setDate(record.get().getDate());
         tempRecord.setRecordId(record.get().getRecordId());
         tempRecord.setDeleted(Boolean.TRUE);
+        userRepository.save(tempRecord);
         return tempRecord;
     }
 
-//    public String one (Company pojo){
-//        userRepository.save(pojo);
-//        return "success";
-//    }
+    public List<Company> getAnotherTableRecord(){
+       List<Company> anotherTable = companyRepository.findAll();
+       return  anotherTable;
+    }
 }
 

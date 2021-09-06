@@ -18,7 +18,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByMobileNo(@Param("mobile") Long mobile);
     User findByRecordId(Long id);
 
-    @Query("SELECT e FROM User e WHERE e.deleted=false")
-    Optional<User> findById(@Param("studentId") Long smarkAsDelete);
+    User findByEmployee(String name);
+
+    @Query("SELECT e FROM User e WHERE e.recordId = :id AND e.deleted=false")
+    Optional<User> getById(@Param("id") Long id);
 
 }
