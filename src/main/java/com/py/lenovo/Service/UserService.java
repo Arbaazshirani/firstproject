@@ -1,9 +1,12 @@
 package com.py.lenovo.Service;
 
+import com.py.lenovo.Bean.LaptopBean;
 import com.py.lenovo.Bean.UserBean;
 import com.py.lenovo.pojo.Company;
+import com.py.lenovo.pojo.Laptop;
 import com.py.lenovo.pojo.User;
 import com.py.lenovo.repository.CompanyRepository;
+import com.py.lenovo.repository.LaptopRepository;
 import com.py.lenovo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,6 +110,7 @@ public class UserService {
     }
 
     public User deletingRecord(Long deleting){
+       // Laptop laptop = new Laptop();
         User record = userRepository.findByRecordId(deleting);
         userRepository.deleteById(deleting);
         return record;
@@ -128,6 +132,14 @@ public class UserService {
     public List<Company> getAnotherTableRecord(){
        List<Company> anotherTable = companyRepository.findAll();
        return  anotherTable;
+    }
+
+    @Autowired
+    LaptopRepository laptopRepository;
+    public Laptop addLaptopRecord(LaptopBean record){
+        Laptop laptop = record.getLaptop();
+        laptopRepository.save(laptop);
+        return laptop;
     }
 }
 

@@ -1,17 +1,16 @@
 package com.py.lenovo.Controller;
 
+import com.py.lenovo.Bean.LaptopBean;
 import com.py.lenovo.Bean.UserBean;
 import com.py.lenovo.Service.UserService;
 import com.py.lenovo.pojo.Company;
+import com.py.lenovo.pojo.Laptop;
 import com.py.lenovo.pojo.User;
-import com.py.lenovo.repository.CompanyRepository;
-import com.py.lenovo.repository.UserRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,6 +95,12 @@ public class UserControllers {
     public List<Company> findAnotherTableRecord(){
         List<Company> responce = userService.getAnotherTableRecord();
         return responce;
+    }
+
+    @ApiOperation(value = "Used to add laptop record to database")
+    @PostMapping("/addLaptopRecord")
+    public Laptop addLaptopRecord(@RequestBody LaptopBean adding){
+        return userService.addLaptopRecord(adding);
     }
 
 }
